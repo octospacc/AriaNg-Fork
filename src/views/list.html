@@ -49,10 +49,15 @@
                         </label>
                     </div>
                     <div class="task-files">
-                        <span ng-bind="task.totalLength | readableVolume"></span>
+                        <i class="icon-download fa fa-arrow-down"></i><span ng-bind="task.totalLength | readableVolume"></span>
+                        <!--<i class="icon-upload fa fa-arrow-up"></i><span ng-bind="task.totalLength | readableVolume"></span><span>, </span>-->
+                        <!--<span>➗️</span><span ng-bind="(task.shareRatio | number: 2)"></span>-->
+                        <!--<span ng-bind="task.totalLength | readableVolume"></span>-->
                         <a ng-href="#!/task/detail/{{task.gid}}" title="{{'Click to view task detail' | translate}}">
-                            <span ng-if="task.files" ng-bind="('format.settings.file-count' | translate: {count: task.selectedFileCount})"></span>
-                        </a><i class="icon-error fa fa-times" ng-if="task && task.status === 'error' && task.errorDescription" title="{{task.errorDescription | translate}}"></i><i class="icon-seeder fa fa-arrow-up" ng-if="task && task.status === 'active' && task.seeder" title="{{'Seeding' | translate}}"></i>
+                            <span ng-if="task.files" ng-bind="('format.settings.file-count' | translate: {count: task.selectedFileCount})"></span><!--
+                        --></a><!--
+                        --><i class="icon-error fa fa-times" ng-if="task && task.status === 'error' && task.errorDescription" title="{{task.errorDescription | translate}}"></i><!--
+                        --><i class="icon-seeder fa fa-arrow-up" ng-if="task && task.status === 'active' && task.seeder" title="{{'Seeding' | translate}}"></i><span ng-bind="task.uploadSpeed | readableVolume" ng-if="task && task.status === 'active' && task.seeder"></span>
                         <a ng-if="isTaskRetryable(task)" ng-click="retryTask(task)" title="{{'Retry' | translate}}" translate>Retry</a>
                     </div>
                 </div>
@@ -78,9 +83,9 @@
                     <span class="task-download-speed" title="{{task.status === 'active' ? (('Download Speed' | translate) + ': ' + (task.downloadSpeed | readableVolume) + '/s') + (task.bittorrent ? ', ' + ('Upload Speed' | translate) + ': ' + (task.uploadSpeed | readableVolume) + '/s' : '') : ''}}"
                           ng-bind="(task.status === 'active' && !task.verifyIntegrityPending && !task.verifiedLength ? (!task.seeder || task.downloadSpeed > 0 ? (task.downloadSpeed | readableVolume) + '/s' : '-') : (task | taskStatus: true | translate: {errorcode: task.errorCode, verifiedPercent: task.verifiedPercent}))"></span>
                 </div>
-                <div class="task-right-arrow visible-md visible-lg">
+                <div class="task-right-arrow" style="height: 20%;"><!-- class="task-right-arrow visible-md visible-lg" -->
                     <a ng-href="#!/task/detail/{{task.gid}}" title="{{'Click to view task detail' | translate}}">
-                        <i class="fa fa-angle-right"></i>
+                        <i class="fa fa-angle-right" style="height: 100%;"></i>
                     </a>
                 </div>
             </div>
